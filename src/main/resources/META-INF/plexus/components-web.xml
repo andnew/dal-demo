@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plexus>
+    <components>
+        <component>
+            <role>org.unidal.web.mvc.model.ModuleRegistry</role>
+            <implementation>org.unidal.web.mvc.model.ModuleRegistry</implementation>
+            <configuration>
+                <defaultModule>org.dal.demo.report.ReportModule</defaultModule>
+            </configuration>
+        </component>
+        <component>
+            <role>org.unidal.web.mvc.Module</role>
+            <role-hint>org.dal.demo.report.ReportModule</role-hint>
+            <implementation>org.dal.demo.report.ReportModule</implementation>
+        </component>
+        <component>
+            <role>org.dal.demo.report.page.hello.Handler</role>
+            <implementation>org.dal.demo.report.page.hello.Handler</implementation>
+            <requirements>
+                <requirement>
+                    <role>org.dal.demo.report.page.hello.JspViewer</role>
+                </requirement>
+            </requirements>
+        </component>
+        <component>
+            <role>org.dal.demo.report.page.hello.JspViewer</role>
+            <implementation>org.dal.demo.report.page.hello.JspViewer</implementation>
+            <requirements>
+                <requirement>
+                    <role>org.unidal.web.mvc.view.model.ModelHandler</role>
+                </requirement>
+            </requirements>
+        </component>
+
+        <component>
+            <role>org.unidal.lookup.logging.LoggerManager</role>
+            <implementation>org.unidal.lookup.logging.TimedConsoleLoggerManager</implementation>
+            <configuration>
+                <dateFormat>yyyy-MM-dd HH:mm:ss.SSS</dateFormat>
+                <showClass>true</showClass>
+                <logFilePattern>dat_{0,date,yyyyMMdd}.log</logFilePattern>
+                <baseDirRef>CAT_HOME</baseDirRef>
+                <defaultBaseDir>/data/applogs/cat</defaultBaseDir>
+            </configuration>
+        </component>
+    </components>
+</plexus>
